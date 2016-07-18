@@ -7,6 +7,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class TicTacToe extends ApplicationAdapter {
+
+	public static final String TITLE = "TicTacToe";
+
+	public static final int WIDTH = 405;
+	public static final int HEiGHT = 720;
+
 	SpriteBatch batch;
 	Texture img;
 	
