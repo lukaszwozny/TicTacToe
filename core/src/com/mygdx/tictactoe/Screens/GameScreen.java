@@ -8,7 +8,7 @@ import com.mygdx.tictactoe.Core.AbstractScreen;
  */
 public class GameScreen extends AbstractScreen {
 
-    public GameScreen(int level){
+    public GameScreen(){
 
     }
 

@@ -26,7 +26,7 @@ public enum ScreenEnum {
     GAME{
         @Override
         public AbstractScreen getScreen(Object... params) {
-            return new GameScreen((Integer) params[0]);
+            return new GameScreen();
         }
     };
 
