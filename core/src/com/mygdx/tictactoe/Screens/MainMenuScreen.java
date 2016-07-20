@@ -36,17 +36,27 @@ public class MainMenuScreen extends AbstractScreen {
         Image bgImg = new Image(bgTexture);
         addActor(bgImg);
 
-        // Start/Exit buttons
-        final int START_X = TicTacToe.WIDTH / 2 - playButtonTexture.getWidth()/2;
-        final int START_y = TicTacToe.HEiGHT - 250;
-        final int INTERVAL = playButtonTexture.getHeight() + 40;
+        // Start buttons
+        final int START_X = TicTacToe.WIDTH / 2 - playButtonTexture.getWidth() / 2;
+        final int START_y = TicTacToe.HEiGHT - 300;
+        final int INTERVAL = playButtonTexture.getHeight() + 150;
+        
         MainMenuButton playButton = new MainMenuButton(playButtonTexture, new IClickCallback() {
             @Override
             public void onClick() {
                 ScreenManager.getInstance().showScreen(ScreenEnum.GAME);
             }
         });
-        playButton.setPosition(START_X,START_y);
+        playButton.setPosition(START_X, START_y);
         addActor(playButton);
+
+        MainMenuButton exitButton = new MainMenuButton(exitButtonTexture, new IClickCallback() {
+            @Override
+            public void onClick() {
+                Gdx.app.exit();
+            }
+        });
+        exitButton.setPosition(START_X, START_y - INTERVAL);
+        addActor(exitButton);
     }
 }
