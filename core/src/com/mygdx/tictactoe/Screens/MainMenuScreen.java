@@ -18,11 +18,6 @@ public class MainMenuScreen extends AbstractScreen {
     }
 
     @Override
-    public void render(float delta) {
-        super.render(delta);
-    }
-
-    @Override
     public void buildStage() {
 
         Image logoImg = new Image(logo);
