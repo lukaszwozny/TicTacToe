@@ -1,5 +1,8 @@
 package com.mygdx.tictactoe.Screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.tictactoe.Core.AbstractScreen;
 
 /**
@@ -7,12 +10,17 @@ import com.mygdx.tictactoe.Core.AbstractScreen;
  */
 public class MainMenuScreen extends AbstractScreen {
 
-    public MainMenuScreen(){
+    Texture logo;
 
+    public MainMenuScreen(){
+        super();
+        logo = new Texture(Gdx.files.internal("badlogic.jpg"));
     }
 
     @Override
     public void buildStage() {
 
+        Image logoImg = new Image(logo);
+        addActor(logoImg);
     }
 }
