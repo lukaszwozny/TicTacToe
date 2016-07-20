@@ -1,12 +1,42 @@
 package com.mygdx.tictactoe;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.tictactoe.Core.AbstractScreen;
+import com.mygdx.tictactoe.Screens.GameScreen;
+import com.mygdx.tictactoe.Screens.LevelSelectScreen;
+import com.mygdx.tictactoe.Screens.MainMenuScreen;
 
-public class TicTacToe extends ApplicationAdapter {
+public class TicTacToe extends Game {
+	public enum ScreenEnum{
+
+		MAIN_MENU{
+			@Override
+			public AbstractScreen getScreen(Object... params){
+				return new MainMenuScreen();
+			}
+		},
+
+		LEVEL_SELECT{
+			@Override
+			public AbstractScreen getScreen(Object... params){
+				return new LevelSelectScreen();
+			}
+		},
+
+		GAME{
+			@Override
+			public AbstractScreen getScreen(Object... params) {
+				return new GameScreen((Integer) params[0]);
+			}
+		};
+
+		public abstract AbstractScreen getScreen(Object... params);
+	}
 
 	public static final String TITLE = "TicTacToe";
 
