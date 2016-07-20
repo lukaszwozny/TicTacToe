@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.mygdx.tictactoe.TicTacToe;
 import javafx.scene.Scene;
 
 /**
@@ -14,7 +15,7 @@ import javafx.scene.Scene;
 public abstract class AbstractScreen extends Stage implements Screen {
 
     protected AbstractScreen(){
-        super(new StretchViewport(320.0f,240.0f,new OrthographicCamera()));
+        super(new StretchViewport(TicTacToe.WIDTH,TicTacToe.HEiGHT,new OrthographicCamera()));
     }
 
     public abstract void buildStage();

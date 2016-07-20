@@ -49,15 +49,8 @@ public class TicTacToe extends Game {
 	
 	@Override
 	public void create () {
+		System.out.println("Create");
 		ScreenManager.getInstance().initialize(this);
 		ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
-	}
-
-	@Override
-	public void render () {
-	}
-	
-	@Override
-	public void dispose () {
 	}
 }
