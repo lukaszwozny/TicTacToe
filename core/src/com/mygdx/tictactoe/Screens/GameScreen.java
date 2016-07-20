@@ -55,6 +55,7 @@ public class GameScreen extends AbstractScreen {
                 });
                 newPlayButton.setSize(SIZE, SIZE);
                 newPlayButton.setPosition(START_X + INTERVAL * i, START_Y + INTERVAL * j);
+                newPlayButton.setgamePosition(i,j);
                 newPlayButton.setDebug(true);
                 playButtonArray.add(newPlayButton);
                 addActor(newPlayButton);

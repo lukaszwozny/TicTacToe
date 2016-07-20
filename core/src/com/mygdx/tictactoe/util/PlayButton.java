@@ -8,6 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  * Created by Senpai on 20.07.2016.
  */
 public class PlayButton extends Button {
+
+    private int gamePosX;
+    private int gamePosY;
+
     public PlayButton(final IClickCallback callback){
         super(new ButtonStyle());
 
@@ -18,5 +22,24 @@ public class PlayButton extends Button {
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
+    }
+
+    public void setgamePosition(int x, int y){
+        gamePosX = x;
+        gamePosY = y;
+    }
+
+    /*
+    *
+    * Gettees and setters
+    *
+    */
+
+    public int getGamePosX() {
+        return gamePosX;
+    }
+
+    public int getGamePosY() {
+        return gamePosY;
     }
 }
