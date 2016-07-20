@@ -1,10 +1,11 @@
 package com.mygdx.tictactoe.Screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.tictactoe.Core.AbstractScreen;
 import com.mygdx.tictactoe.TicTacToe;
@@ -25,15 +26,24 @@ public class GameScreen extends AbstractScreen {
 
     private TurnEnum turnEnum;
 
+    private Label turnLabel;
+
     public GameScreen() {
         init();
     }
 
     private void init() {
         turnEnum = TurnEnum.PLAYER_1;
+        initLabel();
         initTexture();
         initSignArray();
         initPlayButtons();
+    }
+
+    private void initLabel() {
+        turnLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        turnLabel.setPosition(10, TicTacToe.HEiGHT - 30);
+        addActor(turnLabel);
     }
 
     private void initTexture() {
@@ -43,7 +53,11 @@ public class GameScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-        
+        update();
+    }
+
+    private void update() {
+        turnLabel.setText("Now plays: " + turnEnum);
     }
 
     @Override
@@ -55,7 +69,7 @@ public class GameScreen extends AbstractScreen {
 
     private void initSignArray() {
         signArray = new Array<SignEnum>();
-        for(int i=0; i<9; i++){
+        for (int i = 0; i < 9; i++) {
             signArray.add(SignEnum.NONE);
         }
 
@@ -80,7 +94,7 @@ public class GameScreen extends AbstractScreen {
                 });
                 newPlayButton.setSize(SIZE, SIZE);
                 newPlayButton.setPosition(START_X + INTERVAL * i, START_Y + INTERVAL * j);
-                newPlayButton.setgamePosition(i,j);
+                newPlayButton.setgamePosition(i, j);
                 newPlayButton.setDebug(true);
                 playButtonArray.add(newPlayButton);
                 addActor(newPlayButton);
@@ -89,10 +103,9 @@ public class GameScreen extends AbstractScreen {
     }
 
     private void changePlayer() {
-        if(turnEnum == TurnEnum.PLAYER_1){
+        if (turnEnum == TurnEnum.PLAYER_1) {
             turnEnum = TurnEnum.PLAYER_2;
-        }
-        else{
+        } else {
             turnEnum = TurnEnum.PLAYER_1;
         }
     }
