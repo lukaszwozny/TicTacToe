@@ -3,30 +3,42 @@ package com.mygdx.tictactoe.util;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.tictactoe.Screens.GameScreen;
 
 /**
  * Created by Senpai on 20.07.2016.
  */
 public class PlayButton extends Button {
 
-    private int gamePosX;
-    private int gamePosY;
+    private int gamePos;
 
-    public PlayButton(final IClickCallback callback){
+    private GameScreen gameScreen;
+
+    public PlayButton(GameScreen gameScreen, final IClickCallback callback){
         super(new ButtonStyle());
+
+        this.gameScreen = gameScreen;
 
         this.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                checkSpot();
                 callback.onClick();
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
     }
 
-    public void setgamePosition(int x, int y){
-        gamePosX = x;
-        gamePosY = y;
+    private void checkSpot() {
+        if(gameScreen.signArray.get(gamePos) == SignEnum.NONE){
+            System.out.println("Yupi");
+            gameScreen.signArray.set(gamePos, getPlayerSign());
+
+        }
+    }
+
+    public void setgamePosition(int position){
+        gamePos = position;
     }
 
     /*
@@ -36,10 +48,16 @@ public class PlayButton extends Button {
     */
 
     public int getGamePosX() {
-        return gamePosX;
+        return gamePos;
     }
 
-    public int getGamePosY() {
-        return gamePosY;
+    public SignEnum getPlayerSign() {
+        switch(gameScreen.getTurnEnum()){
+            case PLAYER_1:
+                return SignEnum.CROSS;
+            case PLAYER_2:
+                return  SignEnum.CIRCLE;
+        }
+        return SignEnum.NONE;
     }
 }

@@ -22,7 +22,7 @@ public class GameScreen extends AbstractScreen {
     private Texture bgTexture;
 
     private Array<PlayButton> playButtonArray;
-    private Array<SignEnum> signArray;
+    public Array<SignEnum> signArray;
 
     private TurnEnum turnEnum;
 
@@ -34,10 +34,6 @@ public class GameScreen extends AbstractScreen {
 
     private void init() {
         turnEnum = TurnEnum.PLAYER_1;
-        initLabel();
-        initTexture();
-        initSignArray();
-        initPlayButtons();
     }
 
     private void initLabel() {
@@ -46,8 +42,11 @@ public class GameScreen extends AbstractScreen {
         addActor(turnLabel);
     }
 
-    private void initTexture() {
+    private void initBackground() {
         bgTexture = new Texture(Gdx.files.internal("img/bg/game_bg.png"));
+        Image bgImage = new Image(bgTexture);
+        bgImage.setPosition(0, TicTacToe.HEiGHT / 2 - bgImage.getWidth() / 2);
+        addActor(bgImage);
     }
 
     @Override
@@ -57,14 +56,16 @@ public class GameScreen extends AbstractScreen {
     }
 
     private void update() {
+        // TODO Change to display images instead PLAYER_! etc
         turnLabel.setText("Now plays: " + turnEnum);
     }
 
     @Override
     public void buildStage() {
-        Image bgbImage = new Image(bgTexture);
-        bgbImage.setPosition(0, TicTacToe.HEiGHT / 2 - bgbImage.getWidth() / 2);
-        addActor(bgbImage);
+        initLabel();
+        initBackground();
+        initSignArray();
+        initPlayButtons();
     }
 
     private void initSignArray() {
@@ -84,21 +85,19 @@ public class GameScreen extends AbstractScreen {
 
         playButtonArray = new Array<PlayButton>();
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                PlayButton newPlayButton = new PlayButton(new IClickCallback() {
+        for (int i = 0; i < 9; i++) {
+                PlayButton newPlayButton = new PlayButton(this, new IClickCallback() {
                     @Override
                     public void onClick() {
                         changePlayer();
                     }
                 });
                 newPlayButton.setSize(SIZE, SIZE);
-                newPlayButton.setPosition(START_X + INTERVAL * i, START_Y + INTERVAL * j);
-                newPlayButton.setgamePosition(i, j);
+                newPlayButton.setPosition(START_X + INTERVAL * (i/3), START_Y + INTERVAL * (i %3));
+                newPlayButton.setgamePosition(i);
                 newPlayButton.setDebug(true);
                 playButtonArray.add(newPlayButton);
                 addActor(newPlayButton);
-            }
         }
     }
 
@@ -110,5 +109,7 @@ public class GameScreen extends AbstractScreen {
         }
     }
 
-
+    public TurnEnum getTurnEnum(){
+        return turnEnum;
+    }
 }
