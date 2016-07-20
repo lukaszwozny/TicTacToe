@@ -3,7 +3,7 @@ package com.mygdx.tictactoe.Service;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.mygdx.tictactoe.Core.AbstractScreen;
-import com.mygdx.tictactoe.TicTacToe;
+import com.mygdx.tictactoe.util.ScreenEnum;
 
 /**
  * Created by Senpai on 20.07.2016.
@@ -29,7 +29,7 @@ public class ScreenManager {
         this.game = game;
     }
 
-    public void showScreen(TicTacToe.ScreenEnum screenEnum, Object... params){
+    public void showScreen(ScreenEnum screenEnum, Object... params){
 
         // Get current screen to dispose it
         Screen curentScreen = game.getScreen();

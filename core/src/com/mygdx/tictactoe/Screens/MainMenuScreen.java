@@ -10,17 +10,20 @@ import com.mygdx.tictactoe.Core.AbstractScreen;
  */
 public class MainMenuScreen extends AbstractScreen {
 
-    Texture logo;
+    Texture bg;
 
     public MainMenuScreen(){
         super();
-        logo = new Texture(Gdx.files.internal("badlogic.jpg"));
+        bg = new Texture(Gdx.files.internal("img/bg/bg.png"));
     }
 
     @Override
     public void buildStage() {
+        // Bacground texture
+        Image bgImg = new Image(bg);
+        addActor(bgImg);
 
-        Image logoImg = new Image(logo);
-        addActor(logoImg);
+        // Start/Exit buttons
+
     }
 }
