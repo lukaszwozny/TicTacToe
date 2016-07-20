@@ -25,7 +25,7 @@ public class MainMenuScreen extends AbstractScreen {
     }
 
     private void loadTextures() {
-        bgTexture = new Texture(Gdx.files.internal("img/bg/bg.png"));
+        bgTexture = new Texture(Gdx.files.internal("img/bg/mainmenu_bg.png"));
         playButtonTexture = new Texture(Gdx.files.internal("img/button/play.png"));
         exitButtonTexture = new Texture(Gdx.files.internal("img/button/exit.png"));
     }
