@@ -10,6 +10,8 @@ import com.mygdx.tictactoe.Core.AbstractScreen;
 import com.mygdx.tictactoe.TicTacToe;
 import com.mygdx.tictactoe.util.IClickCallback;
 import com.mygdx.tictactoe.util.PlayButton;
+import com.mygdx.tictactoe.util.SignEnum;
+import com.mygdx.tictactoe.util.TurnEnum;
 
 /**
  * Created by Senpai on 20.07.2016.
@@ -17,10 +19,21 @@ import com.mygdx.tictactoe.util.PlayButton;
 public class GameScreen extends AbstractScreen {
 
     private Texture bgTexture;
+
     private Array<PlayButton> playButtonArray;
+    private Array<SignEnum> signArray;
+
+    private TurnEnum turnEnum;
 
     public GameScreen() {
+        init();
+    }
+
+    private void init() {
+        turnEnum = TurnEnum.PLAYER_1;
         initTexture();
+        initSignArray();
+        initPlayButtons();
     }
 
     private void initTexture() {
@@ -28,12 +41,24 @@ public class GameScreen extends AbstractScreen {
     }
 
     @Override
+    public void render(float delta) {
+        super.render(delta);
+        
+    }
+
+    @Override
     public void buildStage() {
         Image bgbImage = new Image(bgTexture);
         bgbImage.setPosition(0, TicTacToe.HEiGHT / 2 - bgbImage.getWidth() / 2);
         addActor(bgbImage);
+    }
 
-        initPlayButtons();
+    private void initSignArray() {
+        signArray = new Array<SignEnum>();
+        for(int i=0; i<9; i++){
+            signArray.add(SignEnum.NONE);
+        }
+
     }
 
     private void initPlayButtons() {
@@ -50,7 +75,7 @@ public class GameScreen extends AbstractScreen {
                 PlayButton newPlayButton = new PlayButton(new IClickCallback() {
                     @Override
                     public void onClick() {
-
+                        changePlayer();
                     }
                 });
                 newPlayButton.setSize(SIZE, SIZE);
@@ -60,6 +85,15 @@ public class GameScreen extends AbstractScreen {
                 playButtonArray.add(newPlayButton);
                 addActor(newPlayButton);
             }
+        }
+    }
+
+    private void changePlayer() {
+        if(turnEnum == TurnEnum.PLAYER_1){
+            turnEnum = TurnEnum.PLAYER_2;
+        }
+        else{
+            turnEnum = TurnEnum.PLAYER_1;
         }
     }
 
