@@ -25,9 +25,9 @@ public class SignImage extends Image {
     private Texture crossTexture1;
     private Texture crossTexture2;
     private Texture crossTexture3;
-    private  Texture circleTexture1;
-    private  Texture circleTexture2;
-    private  Texture circleTexture3;
+    private Texture circleTexture1;
+    private Texture circleTexture2;
+    private Texture circleTexture3;
     //private  Texture noneTexture;
 
     private Array<String> crossTexDirArray;
@@ -50,10 +50,10 @@ public class SignImage extends Image {
         circleTexDirArray.add(CIRCLE3_TEX_DIR);
     }
 
-    public void setTexture(TurnEnum turn){
+    public void setTexture(TurnEnum turn, int gamePos) {
         Texture newTexture;
-        int rand = MathUtils.random(0,2);
-        switch(turn){
+        int rand = MathUtils.random(0, 2);
+        switch (turn) {
             case PLAYER_1:
                 this.setWidth(124);
                 this.setHeight(109);
@@ -67,5 +67,15 @@ public class SignImage extends Image {
                 this.setDrawable(new SpriteDrawable(new Sprite(newTexture)));
                 break;
         }
+        setNewPosition(gamePos);
+    }
+
+    private void setNewPosition(int gamePos) {
+        final int START_X = 30;
+        final int START_Y = 170;
+        final int INTERVAL_X = 124;
+        final int INTERVAL_Y = 109 + 20;
+
+        this.setPosition(START_X + INTERVAL_X * (gamePos / 3), START_Y + INTERVAL_Y * (gamePos % 3));
     }
 }

@@ -37,7 +37,7 @@ public class PlayButton extends Button {
         if(gameScreen.signArray.get(gamePos) == SignEnum.NONE){
             gameScreen.signArray.set(gamePos, getPlayerSign());
             SignImage signImage = new SignImage();
-            signImage.setTexture(gameScreen.getTurnEnum());
+            signImage.setTexture(gameScreen.getTurnEnum(), gamePos);
             gameScreen.addActor(signImage);
 
         }

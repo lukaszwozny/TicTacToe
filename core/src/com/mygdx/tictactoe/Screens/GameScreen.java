@@ -83,18 +83,18 @@ public class GameScreen extends AbstractScreen {
         playButtonArray = new Array<PlayButton>();
 
         for (int i = 0; i < 9; i++) {
-                PlayButton newPlayButton = new PlayButton(this, new IClickCallback() {
-                    @Override
-                    public void onClick() {
-                        changePlayer();
-                    }
-                });
-                newPlayButton.setSize(SIZE, SIZE);
-                newPlayButton.setPosition(START_X + INTERVAL * (i/3), START_Y + INTERVAL * (i %3));
-                newPlayButton.setgamePosition(i);
-                newPlayButton.setDebug(true);
-                playButtonArray.add(newPlayButton);
-                addActor(newPlayButton);
+            PlayButton newPlayButton = new PlayButton(this, new IClickCallback() {
+                @Override
+                public void onClick() {
+                    changePlayer();
+                }
+            });
+            newPlayButton.setSize(SIZE, SIZE);
+            newPlayButton.setPosition(START_X + INTERVAL * (i / 3), START_Y + INTERVAL * (i % 3));
+            newPlayButton.setgamePosition(i);
+            newPlayButton.setDebug(true);
+            playButtonArray.add(newPlayButton);
+            addActor(newPlayButton);
         }
     }
 
@@ -106,7 +106,7 @@ public class GameScreen extends AbstractScreen {
         }
     }
 
-    public TurnEnum getTurnEnum(){
+    public TurnEnum getTurnEnum() {
         return turnEnum;
     }
 }
