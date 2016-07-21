@@ -77,7 +77,7 @@ public class GameScreen extends AbstractScreen {
         final int SIZE = 110;
         // Start positions
         final int START_X = 30;
-        final int START_Y = 170;
+        final int START_Y = 430;
         final int INTERVAL = SIZE + 20;
 
         playButtonArray = new Array<PlayButton>();
@@ -87,14 +87,39 @@ public class GameScreen extends AbstractScreen {
                 @Override
                 public void onClick() {
                     changePlayer();
+                    checkGameStatus();
                 }
             });
             newPlayButton.setSize(SIZE, SIZE);
-            newPlayButton.setPosition(START_X + INTERVAL * (i / 3), START_Y + INTERVAL * (i % 3));
+            newPlayButton.setPosition(START_X + INTERVAL * (i % 3), START_Y - INTERVAL * (i / 3));
             newPlayButton.setgamePosition(i);
             newPlayButton.setDebug(true);
             playButtonArray.add(newPlayButton);
             addActor(newPlayButton);
+        }
+    }
+
+    private void checkGameStatus() {
+        for (int i = 0; i < 3; i++) {
+            int x = i * 3;
+            int y = i;
+            // Check horizontaly
+            if (signArray.get(x) != SignEnum.NONE && signArray.get(x) == signArray.get(x + 1) && signArray.get(x) == signArray.get(x + 2)) {
+                return;
+            }
+            // Check veritical
+            if (signArray.get(y) != SignEnum.NONE && signArray.get(y) == signArray.get(y + 3) && signArray.get(y) == signArray.get(y + 6)) {
+                return;
+            }
+        }
+        // Check cross
+        // Up-left to down-right
+        if (signArray.get(0) != SignEnum.NONE && signArray.get(0) == signArray.get(4) && signArray.get(0) == signArray.get(8)) {
+            return;
+        }
+        // Up-right to down-left
+        if (signArray.get(2) != SignEnum.NONE && signArray.get(2) == signArray.get(4) && signArray.get(2) == signArray.get(6)) {
+            return;
         }
     }
 

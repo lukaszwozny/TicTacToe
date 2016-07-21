@@ -72,10 +72,10 @@ public class SignImage extends Image {
 
     private void setNewPosition(int gamePos) {
         final int START_X = 30;
-        final int START_Y = 170;
+        final int START_Y = 430;
         final int INTERVAL_X = 124;
         final int INTERVAL_Y = 109 + 20;
 
-        this.setPosition(START_X + INTERVAL_X * (gamePos / 3), START_Y + INTERVAL_Y * (gamePos % 3));
+        this.setPosition(START_X + INTERVAL_X * (gamePos % 3), START_Y - INTERVAL_Y * (gamePos / 3));
     }
 }
