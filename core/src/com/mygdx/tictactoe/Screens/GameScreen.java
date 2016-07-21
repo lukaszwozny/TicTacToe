@@ -9,10 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.tictactoe.Core.AbstractScreen;
 import com.mygdx.tictactoe.TicTacToe;
-import com.mygdx.tictactoe.util.IClickCallback;
-import com.mygdx.tictactoe.util.PlayButton;
-import com.mygdx.tictactoe.util.SignEnum;
-import com.mygdx.tictactoe.util.TurnEnum;
+import com.mygdx.tictactoe.util.*;
 
 /**
  * Created by Senpai on 20.07.2016.

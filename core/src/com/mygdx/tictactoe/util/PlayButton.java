@@ -23,16 +23,22 @@ public class PlayButton extends Button {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 checkSpot();
+                drawSign();
                 callback.onClick();
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
     }
 
+    private void drawSign() {
+    }
+
     private void checkSpot() {
         if(gameScreen.signArray.get(gamePos) == SignEnum.NONE){
-            System.out.println("Yupi");
             gameScreen.signArray.set(gamePos, getPlayerSign());
+            SignImage signImage = new SignImage();
+            signImage.setTexture(gameScreen.getTurnEnum());
+            gameScreen.addActor(signImage);
 
         }
     }
