@@ -6,11 +6,21 @@ package com.mygdx.tictactoe.util;
 public enum TurnEnum {
     PLAYER_1 {
         @Override
+        public SignEnum signEnum() {
+            return SignEnum.CROSS;
+        }
+
+        @Override
         public GameStatusEnum gameStatusOnWin() {
             return GameStatusEnum.WINS_X;
         }
     },
     PLAYER_2 {
+        @Override
+        public SignEnum signEnum() {
+            return SignEnum.CIRCLE;
+        }
+
         @Override
         public GameStatusEnum gameStatusOnWin() {
             return GameStatusEnum.WINS_O;
@@ -18,5 +28,6 @@ public enum TurnEnum {
     };
 //    COMPUTER
 
+    public abstract SignEnum signEnum();
     public abstract GameStatusEnum gameStatusOnWin();
 }

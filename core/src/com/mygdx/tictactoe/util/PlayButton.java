@@ -52,12 +52,6 @@ public class PlayButton extends Button {
     */
 
     public SignEnum getPlayerSign() {
-        switch(gameScreen.getTurnEnum()){
-            case PLAYER_1:
-                return SignEnum.CROSS;
-            case PLAYER_2:
-                return  SignEnum.CIRCLE;
-        }
-        return SignEnum.NONE;
+        return gameScreen.getTurnEnum().signEnum();
     }
 }
