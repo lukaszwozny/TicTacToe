@@ -14,7 +14,7 @@ public class PlayButton extends Button {
 
     private GameScreen gameScreen;
 
-    public PlayButton(GameScreen gameScreen, final IClickCallback callback){
+    public PlayButton(final GameScreen gameScreen, final IClickCallback callback){
         super(new ButtonStyle());
 
         this.gameScreen = gameScreen;
@@ -22,15 +22,13 @@ public class PlayButton extends Button {
         this.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                checkSpot();
-                drawSign();
-                callback.onClick();
+                if(gameScreen.getGameStaus() == GameStatusEnum.IN_GAME){
+                    checkSpot();
+                    callback.onClick();
+                }
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
-    }
-
-    private void drawSign() {
     }
 
     private void checkSpot() {
@@ -52,10 +50,6 @@ public class PlayButton extends Button {
     * Gettees and setters
     *
     */
-
-    public int getGamePosX() {
-        return gamePos;
-    }
 
     public SignEnum getPlayerSign() {
         switch(gameScreen.getTurnEnum()){

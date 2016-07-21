@@ -22,6 +22,7 @@ public class GameScreen extends AbstractScreen {
     public Array<SignEnum> signArray;
 
     private TurnEnum turnEnum;
+    private GameStatusEnum gameStaus = GameStatusEnum.IN_GAME;
 
     private Label turnLabel;
 
@@ -54,7 +55,8 @@ public class GameScreen extends AbstractScreen {
 
     private void update() {
         // TODO Change to display images instead PLAYER_! etc
-        turnLabel.setText("Now plays: " + turnEnum);
+        turnLabel.setText("Now plays: " + turnEnum + "\n" +
+                "Game state:" + gameStaus);
     }
 
     @Override
@@ -86,41 +88,47 @@ public class GameScreen extends AbstractScreen {
             PlayButton newPlayButton = new PlayButton(this, new IClickCallback() {
                 @Override
                 public void onClick() {
+                    gameStaus = checkGameStatus();
                     changePlayer();
-                    checkGameStatus();
                 }
             });
             newPlayButton.setSize(SIZE, SIZE);
             newPlayButton.setPosition(START_X + INTERVAL * (i % 3), START_Y - INTERVAL * (i / 3));
             newPlayButton.setgamePosition(i);
-            newPlayButton.setDebug(true);
             playButtonArray.add(newPlayButton);
             addActor(newPlayButton);
         }
     }
 
-    private void checkGameStatus() {
+    private GameStatusEnum checkGameStatus() {
         for (int i = 0; i < 3; i++) {
             int x = i * 3;
             int y = i;
             // Check horizontaly
             if (signArray.get(x) != SignEnum.NONE && signArray.get(x) == signArray.get(x + 1) && signArray.get(x) == signArray.get(x + 2)) {
-                return;
+                return turnEnum.gameStatusOnWin();
             }
             // Check veritical
             if (signArray.get(y) != SignEnum.NONE && signArray.get(y) == signArray.get(y + 3) && signArray.get(y) == signArray.get(y + 6)) {
-                return;
+                return turnEnum.gameStatusOnWin();
             }
         }
         // Check cross
         // Up-left to down-right
         if (signArray.get(0) != SignEnum.NONE && signArray.get(0) == signArray.get(4) && signArray.get(0) == signArray.get(8)) {
-            return;
+            return turnEnum.gameStatusOnWin();
         }
         // Up-right to down-left
         if (signArray.get(2) != SignEnum.NONE && signArray.get(2) == signArray.get(4) && signArray.get(2) == signArray.get(6)) {
-            return;
+            return turnEnum.gameStatusOnWin();
         }
+        // Check draw
+        for (SignEnum sign : signArray) {
+            if (sign == SignEnum.NONE) {
+                return GameStatusEnum.IN_GAME;
+            }
+        }
+        return GameStatusEnum.DRAW;
     }
 
     private void changePlayer() {
@@ -133,5 +141,9 @@ public class GameScreen extends AbstractScreen {
 
     public TurnEnum getTurnEnum() {
         return turnEnum;
+    }
+
+    public GameStatusEnum getGameStaus() {
+        return gameStaus;
     }
 }
