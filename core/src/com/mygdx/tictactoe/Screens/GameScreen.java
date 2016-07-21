@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.tictactoe.Core.AbstractScreen;
+import com.mygdx.tictactoe.Service.ScreenManager;
 import com.mygdx.tictactoe.TicTacToe;
 import com.mygdx.tictactoe.util.*;
 
@@ -16,7 +17,13 @@ import com.mygdx.tictactoe.util.*;
  */
 public class GameScreen extends AbstractScreen {
 
+    private final String BG_TEX_DIR = "img/bg/game_bg.png";
+    private final String AGAIN_BTN_TEX_DIR = "img/button/again.png";
+    private final String MENU_BTN_TEX_DIR = "img/button/menu.png";
+
     private Texture bgTexture;
+    private Texture againButtonTexture;
+    private Texture menuButtonTexture;
 
     private Array<PlayButton> playButtonArray;
     public Array<SignEnum> signArray;
@@ -41,7 +48,7 @@ public class GameScreen extends AbstractScreen {
     }
 
     private void initBackground() {
-        bgTexture = new Texture(Gdx.files.internal("img/bg/game_bg.png"));
+        bgTexture = new Texture(Gdx.files.internal(BG_TEX_DIR));
         Image bgImage = new Image(bgTexture);
         bgImage.setPosition(0, TicTacToe.HEiGHT / 2 - bgImage.getWidth() / 2);
         addActor(bgImage);
@@ -63,8 +70,35 @@ public class GameScreen extends AbstractScreen {
     public void buildStage() {
         initLabel();
         initBackground();
+        initMenuButton();
         initSignArray();
         initPlayButtons();
+    }
+
+    private void initMenuButton() {
+        menuButtonTexture = new Texture(Gdx.files.internal(MENU_BTN_TEX_DIR));
+
+        MainMenuButton menuButton = new MainMenuButton(menuButtonTexture, new IClickCallback() {
+            @Override
+            public void onClick() {
+                ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
+            }
+        });
+        menuButton.setPosition(TicTacToe.WIDTH-menuButton.getWidth()-20,40);
+        addActor(menuButton);
+    }
+
+    private void initAgainButton() {
+        againButtonTexture = new Texture(Gdx.files.internal(AGAIN_BTN_TEX_DIR));
+
+        MainMenuButton againButton = new MainMenuButton(againButtonTexture, new IClickCallback() {
+            @Override
+            public void onClick() {
+                ScreenManager.getInstance().showScreen(ScreenEnum.GAME);
+            }
+        });
+        againButton.setPosition(20,40);
+        addActor(againButton);
     }
 
     private void initSignArray() {
@@ -90,6 +124,7 @@ public class GameScreen extends AbstractScreen {
                 public void onClick() {
                     gameStaus = checkGameStatus();
                     changePlayer();
+                    endGame();
                 }
             });
             newPlayButton.setSize(SIZE, SIZE);
@@ -97,6 +132,12 @@ public class GameScreen extends AbstractScreen {
             newPlayButton.setgamePosition(i);
             playButtonArray.add(newPlayButton);
             addActor(newPlayButton);
+        }
+    }
+
+    private void endGame() {
+        if(gameStaus != GameStatusEnum.IN_GAME){
+            initAgainButton();
         }
     }
 
