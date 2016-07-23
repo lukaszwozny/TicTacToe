@@ -12,13 +12,9 @@ public class TicTacToe extends Game {
 
 	public static final int WIDTH = 405;
 	public static final int HEiGHT = 720;
-
-	SpriteBatch batch;
-	Texture img;
 	
 	@Override
 	public void create () {
-		System.out.println("Create");
 		ScreenManager.getInstance().initialize(this);
 		ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
 	}
